@@ -1,0 +1,17 @@
+.header
+{
+     height:50px;
+    font-size:22px;
+    cursor: pointer;
+    line-height: 50px;
+}
+
+.fst-italic:hover
+{
+color:orange;
+transform: scale(1.1);
+}
+.social-media
+{
+    transform: translateY(-10px);
+}

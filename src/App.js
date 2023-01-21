@@ -1,25 +1,45 @@
-import logo from './logo.svg';
+import React from "react";
+import Footer from "./component/pages/Footer";
+import Header from "./component/pages/Header";
+import Navbar from "./component/pages/Navbar";
 import './App.css';
+import CreateUser from "./component/pages/CreateUser";
+import ShowUser from "./component/pages/ShowUser";
+import {redirect, route} from "./Router"
+import Login from "./component/pages/Login";
+import '../node_modules/bootstrap/dist/css/bootstrap.css';
+import '../node_modules/bootstrap/dist/js/bootstrap.js';
+import EditUser from "./component/pages/EditUser";
+export default class App extends React.Component{
+    constructor(props){
+        super(props);
+        this.id=window.localStorage.getItem('hash').split("/")[1]
+        //this.state.views={
+           this.views={
+                createUser:<CreateUser/>,
+                showuser:<ShowUser/>,
+                login:<Login/>,
+                ["edituser/"+this.id]:<EditUser userid={this.id}/>   
+           }
+      //  }
+        
+    }
+   
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    renderview(){
+        return this.views[route];
+    }
+   
+    render(){
+        return (
+            <>
+            <div className="container-fluid">
+                <Header/>
+                <Navbar/>
+                {this.renderview()}
+                <Footer/>
+            </div>
+            </>
+        );
+    }
 }
-
-export default App;
